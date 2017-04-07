@@ -1,0 +1,4 @@
+---
+
+percona_mirror_source: "rsync.percona.com::rsync/"
+percona_mirror_cron_disabled: true

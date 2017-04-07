@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# http://www.percona.com/blog/2014/02/14/using-percona-rsync-repositories-set-local-centos-mirror/
+
+SOURCE='{{ percona_mirror_source }}'
+DESTINATION='{{ mirror_doc_root }}/percona/'
+
+LOCKFILE=/tmp/$(basename ${DESTINATION}).lock
+
+if [[ ! -e $LOCKFILE ]]; then
+    touch $LOCKFILE
+    rsync -avH               \
+          --human-readable   \
+          --progress         \
+          --safe-links       \
+          --delete           \
+          --delete-after     \
+          --delay-updates    \
+          --exclude '.~tmp~' \
+          --stats            \
+          --itemize-changes  \
+          ${SOURCE} ${DESTINATION}
+    rm $LOCKFILE
+else
+    cat <<EOF 1>&2
+ERROR: Another rsync is already running and has the lock file
+$LOCKFILE.
+EOF
+
+fi
