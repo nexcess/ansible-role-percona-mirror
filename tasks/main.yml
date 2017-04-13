@@ -11,8 +11,8 @@
 - name: Setup CRON Schedule
   cron:
     name="Percona"
-    minute="{{ centos_mirror_cron_minute }}"
-    hour="{{ centos_mirror_cron_hour }}"
+    minute="{{ percona_mirror_cron_minute }}"
+    hour="{{ percona_mirror_cron_hour }}"
     user="{{ mirror_unix_user }}"
     state="present"
     job="{{ mirror_cron_dir }}/percona-mirror"
