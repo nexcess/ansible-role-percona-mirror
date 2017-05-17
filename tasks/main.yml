@@ -15,5 +15,5 @@
     hour="{{ percona_mirror_cron_hour }}"
     user="{{ mirror_unix_user }}"
     state="present"
-    job="{{ mirror_cron_dir }}/percona-mirror"
+    job="{{ mirror_cron_dir }}/percona-mirror >/dev/null 2>&1"
     disabled="{{ percona_mirror_cron_disabled }}"

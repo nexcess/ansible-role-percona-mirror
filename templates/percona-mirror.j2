@@ -20,6 +20,11 @@ if [[ ! -e $LOCKFILE ]]; then
           --stats            \
           --itemize-changes  \
           ${SOURCE} ${DESTINATION}
+
+    if [[ $? -eq 0 ]]; then
+        echo `date +%s` > {{ mirror_timestamp_dir }}/percona
+    fi
+
     rm $LOCKFILE
 else
     cat <<EOF 1>&2
